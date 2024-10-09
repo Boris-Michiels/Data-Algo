@@ -67,16 +67,14 @@ public class Main {
 
 
 
-    static HashMap<Integer, Character> alfabetMap;
+    static HashMap<String, Character> alfabetMap;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         ArrayList<String> lijn = new ArrayList<>(3);
 
-        for (int i = 0; i < 3; i++) {
-            lijn.add(sc.nextLine());
-        }
+        leesLijn(sc, lijn);
 
         alfabetMap = maakAlfabetMap(lijn);
 
@@ -85,51 +83,40 @@ public class Main {
         for (int a = 1; a <= aantalTestGevallen; a++) {
             lijn.clear();
 
-            for (int i = 0; i < 3; i++) {
-                lijn.add(sc.nextLine());
-            }
+            leesLijn(sc, lijn);
 
-            int[] integerZin = new int[lijn.getFirst().length() / 2];
+            StringBuilder zin = new StringBuilder();
 
-            for (int i = 0; i < integerZin.length; i++) {
-                int code = 0;
+            for (int i = 0; i < lijn.getFirst().length() / 2; i++) {
+                StringBuilder code = new StringBuilder();
 
                 for (String s : lijn) {
-                    for (int k = 0; k < 2; k++) {
-                        code *= 2;
-                        if (s.charAt(2 * i + k) == '.') code++;
-                    }
+                    code.append(s, 2 * i, 2 * (i + 1));
                 }
-                integerZin[i] = code;
+                zin.append(alfabetMap.get(code.toString()));
             }
-            System.out.println(a + " " + converteerIntegerZinNaarKarakterZin(integerZin));
+            System.out.println(a + " " + zin);
         }
         sc.close();
     }
 
-    static String converteerIntegerZinNaarKarakterZin(int[] integerZin) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int code : integerZin) {
-            stringBuilder.append(alfabetMap.get(code));
+    static void leesLijn(Scanner sc, ArrayList<String> lijn) {
+        for (int i = 0; i < 3; i++) {
+            lijn.add(sc.nextLine());
         }
-        return stringBuilder.toString();
     }
 
-    static HashMap<Integer, Character> maakAlfabetMap(ArrayList<String> lijn) {
+    static HashMap<String, Character> maakAlfabetMap(ArrayList<String> lijn) {
         String alfabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        HashMap<Integer, Character> alfabetMap = new HashMap<>();
+        HashMap<String, Character> alfabetMap = new HashMap<>();
 
         for (int i = 0; i < 26; i++) {
-            int code = 0;
+            StringBuilder code = new StringBuilder();
 
             for (int j = 0; j < 3; j++) {
-                for (int k = 0; k < 2; k++) {
-                    code *= 2;
-                    if (lijn.get(j).charAt(i*2 + k) == '.') code++;
-                }
+                code.append(lijn.get(j), 2 * i, 2 * (i + 1));
             }
-            alfabetMap.put(code, alfabet.charAt(i));
+            alfabetMap.put(code.toString(), alfabet.charAt(i));
         }
         return alfabetMap;
     }
