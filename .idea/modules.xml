@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Braille/Braille.iml" filepath="$PROJECT_DIR$/Braille/Braille.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Cluedo/Cluedo.iml" filepath="$PROJECT_DIR$/Cluedo/Cluedo.iml" />
       <module fileurl="file://$PROJECT_DIR$/Datastructuren en Algoritmen Oefeningen.iml" filepath="$PROJECT_DIR$/Datastructuren en Algoritmen Oefeningen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Eilanden/Eilanden.iml" filepath="$PROJECT_DIR$/Eilanden/Eilanden.iml" />
     </modules>
   </component>
 </project>
