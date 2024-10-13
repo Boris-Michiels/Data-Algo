@@ -1,6 +1,8 @@
 import java.util.*;
 
 public class Main {
+    private static final int[][] richtingen = new int[][] {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -36,6 +38,7 @@ public class Main {
 
             System.out.println(sb);
         }
+
         sc.close();
     }
 
@@ -65,17 +68,14 @@ public class Main {
             int[] positie = stack.pop();
             grootte++;
 
-            for (int i = -1; i <= 1; i++) {
-                if (positie[0] + i >= 0 && positie[0] + i < hoogte && !bezocht[positie[0] + i][positie[1]] && kaart[positie[0] + i][positie[1]] == '+') {
-                    stack.push(new int[]{positie[0] + i, positie[1]});
-                    bezocht[positie[0] + i][positie[1]] = true;
-                }
-            }
+            for (int[] r : richtingen) {
+                int[] nieuwePositie = {positie[0] + r[0], positie[1] + r[1]};
 
-            for (int i = -1; i <= 1; i++) {
-                if (positie[1] + i >= 0 && positie[1] + i < breedte && !bezocht[positie[0]][positie[1] + i] && kaart[positie[0]][positie[1] + i] == '+') {
-                    stack.push(new int[]{positie[0], positie[1] + i});
-                    bezocht[positie[0]][positie[1] + i] = true;
+                if (nieuwePositie[0] >= 0 && nieuwePositie[0] < hoogte && nieuwePositie[1] >= 0 && nieuwePositie[1] < breedte
+                        && !bezocht[nieuwePositie[0]][nieuwePositie[1]]
+                        && kaart[nieuwePositie[0]][nieuwePositie[1]] == '+') {
+                    stack.push(nieuwePositie);
+                    bezocht[nieuwePositie[0]][nieuwePositie[1]] = true;
                 }
             }
         }
